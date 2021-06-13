@@ -1,21 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
 
-export default function App() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator, TransitionSpecs } from "@react-navigation/stack";
+
+import MainScreen from "./Screen/Main";
+import DrinkScreen from "./Screen/Drink";
+import LoadingScreen from "./Screen/Loading";
+
+const Stack = createStackNavigator();
+
+function MyStack() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="main"
+        component={MainScreen}
+        options={{
+          title: "My home",
+          headerStyle: {
+            backgroundColor: "#5d00ff",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            textAlign: "center",
+            fontWeight: "bold",
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Drink"
+        component={DrinkScreen}
+        options={{
+          title: "Detail",
+          headerStyle: {
+            backgroundColor: "#5d00ff",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            textAlign: "center",
+            fontWeight: "bold",
+          },
+        }}
+      />
+      <Stack.Screen name="Loading" component={LoadingScreen} />
+    </Stack.Navigator>
+  );
+}
+function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
